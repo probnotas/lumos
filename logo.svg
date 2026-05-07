@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" fill="none">
+  <!-- 4-pointed star -->
+  <path d="M60 10 C60 10, 65 50, 60 60 C60 60, 55 50, 60 10Z" fill="currentColor"/>
+  <path d="M60 110 C60 110, 55 70, 60 60 C60 60, 65 70, 60 110Z" fill="currentColor"/>
+  <path d="M10 60 C10 60, 50 55, 60 60 C60 60, 50 65, 10 60Z" fill="currentColor"/>
+  <path d="M110 60 C110 60, 70 65, 60 60 C60 60, 70 55, 110 60Z" fill="currentColor"/>
+  <!-- EEG brainwave line extending right -->
+  <path d="M95 60 Q110 60, 120 55 Q130 50, 135 60 Q140 70, 148 58 Q156 46, 162 60 Q168 74, 176 58 Q184 42, 190 60 Q196 72, 204 58 Q210 48, 218 58 Q224 66, 232 58 Q238 52, 248 57 Q256 61, 266 58 Q274 56, 284 58 Q294 60, 310 59 Q326 58, 350 59 L380 59" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>

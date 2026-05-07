@@ -1,0 +1,968 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lumos Inc. — Product</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-display: 'Instrument Serif', serif;
+    --font-body: 'Inter', sans-serif;
+    --white: #ffffff;
+    --off-white: #f5f5f7;
+    --black: #1d1d1f;
+    --gray: #86868b;
+    --light-gray: #e8e8ed;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    color: var(--black);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  a { text-decoration: none; color: inherit; }
+  button { font-family: inherit; border: none; background: none; cursor: pointer; }
+
+  /* ── Nav ── */
+  .nav {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    background: transparent;
+  }
+  .nav-wordmark {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+  }
+  .nav-wordmark img {
+    height: 120px;
+    width: auto;
+    filter: brightness(0);
+    margin-top: -20px;
+  }
+  .nav-links-left {
+    display: none;
+    align-items: center;
+    gap: 32px;
+  }
+  @media (min-width: 768px) {
+    .nav-links-left { display: flex; }
+  }
+  .nav-links-left a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--gray);
+    transition: color 240ms cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+  }
+  .nav-links-left a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -2px;
+    width: 0; height: 1px;
+    background: var(--black);
+    transition: width 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-links-left a.active,
+  .nav-links-left a:hover { color: var(--black); }
+  .nav-links-left a:hover::after,
+  .nav-links-left a.active::after { width: 100%; }
+
+  .nav-cta {
+    border-radius: 9999px;
+    padding: 10px 24px;
+    font-size: 0.875rem;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: var(--off-white);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+  .hero-bar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 40px 48px 48px;
+  }
+  .hero-text h1 {
+    font-family: var(--font-display);
+    font-size: 4.5rem;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--black);
+  }
+  .hero-text p {
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--black);
+    opacity: 0.7;
+    margin-top: 8px;
+    letter-spacing: -0.01em;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .btn-solid {
+    padding: 12px 28px;
+    border-radius: 980px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  .nav-cta {
+    border-radius: 9999px;
+    padding: 10px 24px;
+    font-size: 0.875rem;
+  }
+  .liquid-glass {
+    background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); border: none;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+    position: relative; overflow: hidden;
+    transition: transform 240ms cubic-bezier(0.22,1,0.36,1);
+    color: #ffffff; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .liquid-glass::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1.4px;
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 40%,
+      rgba(255,255,255,0) 50%, rgba(255,255,255,0.1) 60%,
+      rgba(255,255,255,0.4) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+  }
+  .liquid-glass:hover { transform: scale(1.03); opacity: 0.9; }
+  @media (max-width: 768px) {
+    .hero-bottom { flex-direction: column; align-items: flex-start; gap: 24px; padding: 24px; }
+    .hero-text h1 { font-size: 2.5rem; }
+  }
+
+  /* ── Scroll-reveal section ── */
+  .reveal-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 40px;
+    background: var(--off-white);
+    overflow: hidden;
+  }
+  .reveal-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 50%;
+    background: radial-gradient(ellipse, rgba(180,160,220,0.12) 0%, transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+  }
+  .reveal-text {
+    position: relative;
+    z-index: 1;
+  }
+  .reveal-text p {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    max-width: 780px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+  }
+  .reveal-text p.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-text p + p {
+    margin-top: 40px;
+  }
+  @media (min-width: 768px) {
+    .reveal-text p { font-size: 3rem; }
+  }
+  @media (min-width: 1024px) {
+    .reveal-text p { font-size: 3.5rem; }
+  }
+
+  /* ── Carousel section ── */
+  .carousel-section {
+    padding: 120px 40px 80px;
+    background: var(--white);
+  }
+  .carousel-heading {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    text-align: center;
+    margin-bottom: 56px;
+    color: var(--black);
+  }
+  @media (min-width: 768px) {
+    .carousel-heading { font-size: 3rem; }
+  }
+  .carousel-wrapper {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .carousel-track {
+    display: flex;
+    gap: 0;
+  }
+  .carousel-slide {
+    flex: 0 0 100%;
+    min-width: 100%;
+    padding: 0 24px 24px;
+  }
+  .carousel-card {
+    width: 100%;
+    height: 520px;
+    background: var(--off-white);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (max-width: 768px) {
+    .carousel-card { height: 320px; }
+  }
+  .carousel-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .carousel-desc {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--gray);
+    margin-top: 20px;
+    padding: 0 4px;
+    max-width: 560px;
+  }
+  .carousel-controls {
+    position: absolute;
+    right: 28px;
+    bottom: 30px;
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+  }
+  .carousel-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--off-white);
+    border: 1px solid var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 200ms ease;
+    color: var(--black);
+  }
+  .carousel-btn:hover {
+    background: var(--light-gray);
+  }
+  .carousel-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .carousel-caption {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--gray);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── Scroll Video Section ── */
+  .scroll-video-section {
+    position: relative;
+    height: 400vh;
+    background: #000;
+  }
+  .sticky-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  #scrollVideo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* ── Scroll Video Text Overlays ── */
+  .scroll-text-overlay {
+    position: absolute;
+    z-index: 10;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .scroll-text-block {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.05s linear;
+    max-width: 420px;
+    padding: 0 48px;
+  }
+  .scroll-text-block .st-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 14px;
+  }
+  .scroll-text-block .st-title {
+    font-family: var(--font-display);
+    font-size: 2.75rem;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  .scroll-text-block .st-desc {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.6);
+  }
+  /* State 1: left-center */
+  .scroll-text-1 {
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  /* State 2: left side over black space */
+  .scroll-text-2 {
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: left;
+  }
+  /* State 3: right side over black space (ear is on left) */
+  .scroll-text-3 {
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: left;
+  }
+  @media (max-width: 768px) {
+    .scroll-text-block { max-width: 280px; padding: 0 24px; }
+    .scroll-text-block .st-title { font-size: 1.75rem; }
+    .scroll-text-block .st-desc { font-size: 0.8125rem; }
+    .scroll-text-1 { left: 5%; top: 10%; transform: none; }
+    .scroll-text-2 { left: 5%; top: 8%; transform: none; }
+    .scroll-text-3 { right: 5%; top: 8%; transform: none; }
+  }
+  @media (min-width: 1200px) {
+    .scroll-text-block { max-width: 500px; }
+    .scroll-text-block .st-title { font-size: 3.25rem; }
+    .scroll-text-block .st-desc { font-size: 1rem; }
+    .scroll-text-1 { left: 7%; }
+    .scroll-text-2 { left: 7%; }
+    .scroll-text-3 { right: 7%; }
+  }
+
+  /* ── Impact Title ── */
+  .impact-title-section {
+    padding: 140px 48px 60px;
+    background: var(--white);
+    text-align: center;
+  }
+  .impact-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 20px;
+  }
+  .impact-heading {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--black);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  @media (min-width: 768px) {
+    .impact-heading { font-size: 4.5rem; }
+  }
+
+  /* ── Layer 1 section ── */
+  .layer-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 80px;
+    padding: 120px 80px;
+    background: var(--white);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    .layer-section { flex-direction: column; padding: 80px 24px; gap: 48px; }
+  }
+  .layer-img-wrap {
+    flex: 0 0 50%;
+    max-width: 50%;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--off-white);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (max-width: 768px) {
+    .layer-img-wrap { max-width: 100%; flex: unset; width: 100%; min-height: 280px; }
+  }
+  .layer-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .layer-content {
+    flex: 1;
+  }
+  .layer-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 12px;
+  }
+  .layer-title {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 24px;
+  }
+  @media (max-width: 768px) {
+    .layer-title { font-size: 2.25rem; }
+  }
+  .layer-desc {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--gray);
+    max-width: 480px;
+  }
+  .layer-reverse {
+    flex-direction: row-reverse;
+  }
+  @media (max-width: 768px) {
+    .layer-reverse { flex-direction: column; }
+  }
+
+  /* ── Animations ── */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Footer — Dark ─────────────────────────────── */
+  .site-footer {
+    background: #141414; color: #fff; padding: 100px 80px 56px;
+  }
+  @media (max-width: 768px) { .site-footer { padding: 72px 32px 40px; } }
+  .footer-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 80px; margin-bottom: 96px;
+  }
+  @media (max-width: 768px) {
+    .footer-top { flex-direction: column; gap: 56px; margin-bottom: 56px; }
+  }
+  .footer-logo { flex-shrink: 0; }
+  .footer-logo-mark {
+    line-height: 1;
+  }
+  .footer-logo-mark img {
+    height: 140px;
+    width: auto;
+  }
+  .footer-right { max-width: 480px; }
+  .footer-vision-label {
+    font-family: var(--font-body); font-size: 0.8125rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin: 0 0 16px;
+  }
+  .footer-vision {
+    font-family: var(--font-body); font-size: 0.9375rem;
+    line-height: 1.7; color: rgba(255,255,255,0.65); margin: 0;
+  }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 80px; padding-top: 56px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  @media (max-width: 768px) {
+    .footer-bottom { flex-direction: column; gap: 40px; }
+  }
+  .footer-col h4 {
+    font-family: var(--font-body); font-size: 0.8125rem; font-weight: 400;
+    color: rgba(255,255,255,0.5); margin: 0 0 12px; letter-spacing: 0.03em;
+  }
+  .footer-col p, .footer-col a {
+    font-family: var(--font-body); font-size: 0.875rem; line-height: 1.8;
+    color: rgba(255,255,255,0.75); margin: 0; display: block;
+    transition: color 0.2s ease;
+  }
+  .footer-col a:hover { color: #fff; }
+  .footer-copy {
+    margin-top: 72px; font-family: var(--font-body);
+    font-size: 0.75rem; color: rgba(255,255,255,0.3);
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <a href="lumos-hero.html" class="nav-wordmark"><img src="logo.png" alt="Lumos" /></a>
+
+  <div class="nav-links-left">
+    <a href="lumos-hero.html">Home</a>
+    <a href="product.html" class="active">Product</a>
+    <a href="mission.html">Mission</a>
+    <a href="lumos-hero.html#reach">Reach Us</a>
+  </div>
+
+  <button class="liquid-glass nav-cta" onclick="window.location.href='waitlist.html'">Join Waitlist</button>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <img class="hero-img" src="architect.png" alt="Person wearing the Lumos headband" />
+  <div class="hero-bar">
+    <div class="hero-text">
+      <h1>Lumos Architect</h1>
+      <p>Non-invasive dream interface. Featherweight design.</p>
+    </div>
+    <div class="hero-actions">
+      <button class="liquid-glass btn-solid" onclick="window.location.href='waitlist.html'">Join Waitlist</button>
+    </div>
+  </div>
+</section>
+
+<!-- Scroll-reveal -->
+<section class="reveal-section">
+  <div class="reveal-text">
+    <p>Lumos reads your <span class="serif">sleep architecture</span> in <span class="serif">real time,</span> guiding you into <span class="serif">lucid states</span> with gentle <span class="serif">neural feedback.</span></p>
+    <p>So you can <span class="serif">explore, create, heal</span> and <span class="serif">rest</span> in ways never before possible.</p>
+    <p>The era of <span class="serif">conscious sleep</span> is here.</p>
+  </div>
+</section>
+
+<!-- Carousel -->
+<section class="carousel-section">
+  <h2 class="carousel-heading">Take a closer look.</h2>
+  <div class="carousel-wrapper">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide">
+        <div class="carousel-card"><img src="arch1.png" alt="Lumos Headband material close-up" /></div>
+        <p class="carousel-desc">Crafted from aerospace-grade matte-black polymer and lined with medical-grade silicone, the Architect is built to sit comfortably against skin for eight hours straight — no pressure points, no irritation.</p>
+      </div>
+      <div class="carousel-slide">
+        <div class="carousel-card"><img src="arch 2.png" alt="Lumos Headband LED indicators" /></div>
+        <p class="carousel-desc">Five precision LED indicators on the front module display your current sleep stage — light, deep, or REM — and double as a battery gauge during charging, so you always know the headband's status at a glance.</p>
+      </div>
+      <div class="carousel-slide">
+        <div class="carousel-card"><img src="arch3.png" alt="Adjustable rear strap" /></div>
+        <p class="carousel-desc">The rear strap features ventilation slots for airflow and a micro-adjust buckle system flanked by cushioned pads, ensuring a secure, breathable fit for every head size through the night.</p>
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="carouselPrev" aria-label="Previous">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button class="carousel-btn" id="carouselNext" aria-label="Next">
+        <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"></polyline></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Scroll Video -->
+<section class="scroll-video-section">
+  <div class="sticky-container">
+    <canvas id="scrollVideo"></canvas>
+    <div class="scroll-text-overlay">
+
+      <div class="scroll-text-block scroll-text-1" id="scrollText1">
+        <div class="st-label">Technology</div>
+        <h3 class="st-title">Explore what's inside Architect.</h3>
+      </div>
+
+      <div class="scroll-text-block scroll-text-2" id="scrollText2">
+        <div class="st-label">Detection</div>
+        <h3 class="st-title">Reading your brain. In real time.</h3>
+        <p class="st-desc">Architect houses four medical-grade EEG channels embedded seamlessly into the headband's inner lining. These dry-electrode sensors continuously monitor cortical activity across the frontal and temporal lobes — detecting the precise moment your brain transitions from light sleep into deep slow-wave stages and, ultimately, into REM. The system classifies sleep phases with clinical-level accuracy in under three seconds, giving Architect the intelligence to act at exactly the right moment.</p>
+      </div>
+
+      <div class="scroll-text-block scroll-text-3" id="scrollText3">
+        <div class="st-label">Action</div>
+        <h3 class="st-title">The signal that changes everything.</h3>
+        <p class="st-desc">Once REM is confirmed, Architect activates its bone-conduction transducers — delivering a precisely calibrated audio cue lasting just 50 to 100 milliseconds. The sound is imperceptible to anyone nearby, but your sleeping brain registers it clearly. Over successive nights, this cue becomes neurally linked to an intention you set before bed — a problem to solve, a skill to rehearse, a place to revisit. The result: a reliable neural pathway between external stimulus and conscious awareness inside the dream, dramatically increasing your probability of lucidity.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Impact Title -->
+<section class="impact-title-section fade-up">
+  <p class="impact-label">Three layers. One outcome.</p>
+  <h2 class="impact-heading">What happens when you sleep with Architect.</h2>
+</section>
+
+<!-- Layer 1 -->
+<section class="layer-section fade-up">
+  <div class="layer-img-wrap">
+    <img src="sleep.png" alt="Person sleeping with Lumos headband" />
+  </div>
+  <div class="layer-content">
+    <div class="layer-label">Layer 1</div>
+    <h3 class="layer-title">Fixing your sleep.</h3>
+    <p class="layer-desc">Before you dream, you need to rest. Lumos continuously monitors your sleep cycles — detecting micro-arousals, optimizing REM transitions, and nudging your brain toward deeper, more restorative stages. Most users report measurably better sleep within the first week.</p>
+  </div>
+</section>
+
+<!-- Layer 2 -->
+<section class="layer-section layer-reverse fade-up">
+  <div class="layer-img-wrap">
+    <img src="2.png" alt="Targeted Memory Reactivation" />
+  </div>
+  <div class="layer-content">
+    <div class="layer-label">Layer 2</div>
+    <h3 class="layer-title">Retention.</h3>
+    <p class="layer-desc">Lumos uses bone conduction to trigger Targeted Memory Reactivation during sleep. Subtle audio cues replayed at precisely the right sleep stage allow your brain to consolidate, strengthen, and review information — turning eight hours of rest into eight hours of learning.</p>
+  </div>
+</section>
+
+<!-- Layer 3 -->
+<section class="layer-section fade-up">
+  <div class="layer-img-wrap">
+    <img src="3.png" alt="The Ramanujan Effect" />
+  </div>
+  <div class="layer-content">
+    <div class="layer-label">Layer 3</div>
+    <h3 class="layer-title">The Ramanujan Effect.</h3>
+    <p class="layer-desc">Set an intention before you sleep — a problem to solve, a skill to rehearse, a place to visit. Lumos detects the onset of REM and delivers precisely timed neural cues that bring you to full consciousness inside the dream, letting you act with purpose while your body rests.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site-footer" id="reach">
+  <div class="footer-top">
+    <div class="footer-logo">
+      <div class="footer-logo-mark"><img src="logo.png" alt="Lumos" /></div>
+    </div>
+    <div class="footer-right">
+      <p class="footer-vision-label">Our Vision</p>
+      <p class="footer-vision">Eight billion people fall unconscious every night and waste a third of their lives in the dark. We're ending that. Lumos is building the first technology that makes every human being conscious inside their own sleep — unlocking a new dimension of existence that evolution left sealed. This isn't incremental. This is the last frontier of the human mind.</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-col">
+      <h4>Lumos Inc.</h4>
+      <p>Research-stage neurotechnology</p>
+      <p>Toronto, ON, Canada</p>
+    </div>
+    <div class="footer-col">
+      <h4>General Inquiries</h4>
+      <a href="mailto:armaansharma2311@gmail.com">armaansharma2311@gmail.com</a>
+    </div>
+    <div class="footer-col">
+      <h4>Careers</h4>
+      <a href="mailto:thriloushj@gmail.com">thriloushj@gmail.com</a>
+    </div>
+    <div class="footer-col">
+      <h4>Press</h4>
+      <a href="mailto:armaansharma2311@gmail.com">armaansharma2311@gmail.com</a>
+    </div>
+    <div class="footer-col">
+      <h4>Social</h4>
+      <a href="#">@lumoshq</a>
+    </div>
+  </div>
+
+  <p class="footer-copy">&copy; 2026 Lumos Inc. All Rights Reserved</p>
+</footer>
+
+<script>
+  // Scroll-reveal observer
+  const revealPs = document.querySelectorAll('.reveal-text p');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.3 });
+  revealPs.forEach((p, i) => {
+    p.style.transitionDelay = `${i * 0.15}s`;
+    revealObs.observe(p);
+  });
+
+  // Fade-up observer
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+  fadeEls.forEach(el => fadeObs.observe(el));
+
+  // Carousel
+  const track = document.getElementById('carouselTrack');
+  const slides = track.querySelectorAll('.carousel-slide');
+  const prevBtn = document.getElementById('carouselPrev');
+  const nextBtn = document.getElementById('carouselNext');
+  let currentSlide = 0;
+
+  function updateCarousel() {
+    track.style.transition = 'transform 600ms cubic-bezier(0.22,1,0.36,1)';
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    if (currentSlide > 0) { currentSlide--; updateCarousel(); }
+  });
+  nextBtn.addEventListener('click', () => {
+    if (currentSlide < slides.length - 1) { currentSlide++; updateCarousel(); }
+  });
+
+  // ── Scroll-scrub Canvas Video ──
+  (function() {
+    const TOTAL_FRAMES = 347;
+    const FRAME_PATH = 'assets/frames/frame_';
+    const FRAME_EXT = '.jpg';
+    const canvas = document.getElementById('scrollVideo');
+    const ctx = canvas.getContext('2d');
+    const section = document.querySelector('.scroll-video-section');
+
+    // Frame cache
+    const frames = new Array(TOTAL_FRAMES);
+    let loadedCount = 0;
+    let currentFrame = 0;
+    let targetFrame = 0;
+    let animating = false;
+
+    // Retina scaling + responsive resize
+    function resizeCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      drawFrame(currentFrame);
+    }
+
+    // Frame path helper (1-indexed, zero-padded to 4 digits)
+    function framePath(index) {
+      const num = String(index + 1).padStart(4, '0');
+      return FRAME_PATH + num + FRAME_EXT;
+    }
+
+    // Draw a frame to canvas (cover fit)
+    function drawFrame(index) {
+      const img = frames[index];
+      if (!img || !img.complete || !img.naturalWidth) return;
+
+      const cw = canvas.width / (window.devicePixelRatio || 1);
+      const ch = canvas.height / (window.devicePixelRatio || 1);
+      const iw = img.naturalWidth;
+      const ih = img.naturalHeight;
+
+      // Cover fit calculation
+      const scale = Math.max(cw / iw, ch / ih);
+      const sw = iw * scale;
+      const sh = ih * scale;
+      const sx = (cw - sw) / 2;
+      const sy = (ch - sh) / 2;
+
+      ctx.clearRect(0, 0, cw, ch);
+      ctx.drawImage(img, sx, sy, sw, sh);
+    }
+
+    // Preload frames in batches (nearby first)
+    function preloadRange(start, end) {
+      for (let i = start; i <= end && i < TOTAL_FRAMES; i++) {
+        if (frames[i]) continue;
+        const img = new Image();
+        img.src = framePath(i);
+        frames[i] = img;
+        img.onload = function() {
+          loadedCount++;
+          if (i === 0 && currentFrame === 0) drawFrame(0);
+        };
+      }
+    }
+
+    // Initial preload: first 30 frames immediately, rest progressively
+    preloadRange(0, 29);
+    setTimeout(() => preloadRange(30, 99), 200);
+    setTimeout(() => preloadRange(100, 199), 600);
+    setTimeout(() => preloadRange(200, TOTAL_FRAMES - 1), 1200);
+
+    // Smooth interpolation loop
+    function animate() {
+      if (Math.abs(targetFrame - currentFrame) < 0.5) {
+        currentFrame = targetFrame;
+        animating = false;
+      } else {
+        currentFrame += (targetFrame - currentFrame) * 0.12;
+        requestAnimationFrame(animate);
+      }
+      drawFrame(Math.round(currentFrame));
+    }
+
+    function startAnimation() {
+      if (!animating) {
+        animating = true;
+        requestAnimationFrame(animate);
+      }
+    }
+
+    // Text overlay elements
+    const text1 = document.getElementById('scrollText1');
+    const text2 = document.getElementById('scrollText2');
+    const text3 = document.getElementById('scrollText3');
+
+    // Compute opacity with smooth fade-in/out within a progress range
+    function rangeOpacity(progress, fadeIn, peakStart, peakEnd, fadeOut) {
+      if (progress < fadeIn || progress > fadeOut) return 0;
+      if (progress >= peakStart && progress <= peakEnd) return 1;
+      if (progress < peakStart) return (progress - fadeIn) / (peakStart - fadeIn);
+      return 1 - (progress - peakEnd) / (fadeOut - peakEnd);
+    }
+
+    function updateTextOverlays(progress) {
+      // State 1: wide shot ~0.02–0.20
+      text1.style.opacity = rangeOpacity(progress, 0.02, 0.06, 0.16, 0.24);
+      // State 2: headband close-up ~0.30–0.55
+      text2.style.opacity = rangeOpacity(progress, 0.30, 0.36, 0.50, 0.58);
+      // State 3: ear close-up ~0.64–0.88
+      text3.style.opacity = rangeOpacity(progress, 0.64, 0.70, 0.82, 0.90);
+    }
+
+    // Scroll handler
+    function onScroll() {
+      const rect = section.getBoundingClientRect();
+      const sectionTop = -rect.top;
+      const sectionHeight = rect.height - window.innerHeight;
+
+      if (sectionTop < 0 || sectionTop > sectionHeight) {
+        // Hide all text when outside section
+        text1.style.opacity = 0;
+        text2.style.opacity = 0;
+        text3.style.opacity = 0;
+        return;
+      }
+
+      const progress = Math.min(Math.max(sectionTop / sectionHeight, 0), 1);
+      targetFrame = Math.min(Math.floor(progress * (TOTAL_FRAMES - 1)), TOTAL_FRAMES - 1);
+
+      // Update text overlays
+      updateTextOverlays(progress);
+
+      // Preload nearby frames
+      const nearby = 15;
+      preloadRange(Math.max(0, targetFrame - nearby), Math.min(TOTAL_FRAMES - 1, targetFrame + nearby));
+
+      startAnimation();
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Initial draw once first frame loads
+    if (frames[0] && frames[0].complete) {
+      drawFrame(0);
+    }
+  })();
+</script>
+</body>
+</html>

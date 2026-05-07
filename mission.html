@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lumos Inc. — Mission</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-display: 'Instrument Serif', serif;
+    --font-body: 'Inter', sans-serif;
+    --white: #ffffff;
+    --off-white: #f9f9fb;
+    --black: #1d1d1f;
+    --gray: #424245;
+    --light-gray: #86868b;
+    --accent: #000000;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    color: var(--black);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.6;
+  }
+  a { text-decoration: none; color: inherit; }
+  
+  /* ── Nav ── */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .nav-wordmark {
+    display: inline-flex; align-items: center; line-height: 1;
+  }
+  .nav-wordmark img { height: 120px; width: auto; filter: brightness(0); margin-top: -20px; }
+  .nav-links {
+    display: none;
+    align-items: center;
+    gap: 32px;
+  }
+  @media (min-width: 768px) {
+    .nav-links { display: flex; }
+  }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--light-gray);
+    transition: color 240ms ease;
+    position: relative;
+  }
+  .nav-links a.active,
+  .nav-links a:hover { color: var(--black); }
+  
+  .liquid-glass {
+    background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); border: none;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+    position: relative; overflow: hidden;
+    transition: transform 240ms cubic-bezier(0.22,1,0.36,1);
+    color: #ffffff; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .liquid-glass::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1.4px;
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 40%,
+      rgba(255,255,255,0) 50%, rgba(255,255,255,0.1) 60%,
+      rgba(255,255,255,0.4) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+  }
+  .liquid-glass:hover { transform: scale(1.03); opacity: 0.9; }
+
+  .nav-cta {
+    border-radius: 9999px;
+    padding: 10px 24px;
+    font-size: 0.875rem;
+  }
+
+  /* ── Content Layout ── */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 160px 24px 100px;
+  }
+
+  header {
+    margin-bottom: 80px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: 4.5rem;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--black);
+    margin-bottom: 40px;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    margin: 80px 0 32px;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 400;
+    margin: 48px 0 24px;
+    color: var(--black);
+  }
+
+  p {
+    font-size: 1.125rem;
+    color: var(--gray);
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+
+  .highlight {
+    background-color: #fef08a;
+    color: var(--black);
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  .layer-block {
+    margin-bottom: 48px;
+    padding-left: 24px;
+    border-left: 2px solid var(--black);
+  }
+  
+  .layer-title {
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--light-gray);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .roadmap-item {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .roadmap-tag {
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--black);
+    min-width: 100px;
+  }
+
+  footer.site-footer {
+    background: #141414; color: #fff; padding: 100px 80px 56px;
+    margin-top: 120px;
+  }
+  @media (max-width: 768px) { footer.site-footer { padding: 72px 32px 40px; } }
+  .footer-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 80px; margin-bottom: 96px;
+  }
+  @media (max-width: 768px) {
+    .footer-top { flex-direction: column; gap: 56px; margin-bottom: 56px; }
+  }
+  .footer-logo { flex-shrink: 0; }
+  .footer-logo-mark { line-height: 1; }
+  .footer-logo-mark img { height: 140px; width: auto; }
+  .footer-right { max-width: 480px; }
+  .footer-vision-label {
+    font-family: var(--font-body); font-size: 0.8125rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin: 0 0 16px;
+  }
+  .footer-vision {
+    font-family: var(--font-body); font-size: 0.9375rem;
+    line-height: 1.7; color: rgba(255,255,255,0.65); margin: 0;
+  }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 80px; padding-top: 56px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  @media (max-width: 768px) {
+    .footer-bottom { flex-direction: column; gap: 40px; }
+  }
+  .footer-col h4 {
+    font-family: var(--font-body); font-size: 0.8125rem; font-weight: 400;
+    color: rgba(255,255,255,0.5); margin: 0 0 12px; letter-spacing: 0.03em;
+  }
+  .footer-col p, .footer-col a {
+    font-family: var(--font-body); font-size: 0.875rem; line-height: 1.8;
+    color: rgba(255,255,255,0.75); margin: 0; display: block;
+    transition: color 0.2s ease;
+  }
+  .footer-col a:hover { color: #fff; }
+  .footer-copy {
+    margin-top: 72px; font-family: var(--font-body);
+    font-size: 0.75rem; color: rgba(255,255,255,0.3);
+  }
+
+  @media (max-width: 768px) {
+    h1 { font-size: 3rem; }
+    h2 { font-size: 2rem; }
+    .container { padding-top: 120px; }
+    .nav { padding: 16px 24px; }
+  }
+
+  /* ── Animations ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="lumos-hero.html" class="nav-wordmark"><img src="logo.png" alt="Lumos" /></a>
+  <div class="nav-links">
+    <a href="lumos-hero.html">Home</a>
+    <a href="product.html">Product</a>
+    <a href="mission.html" class="active">Mission</a>
+    <a href="lumos-hero.html#reach">Reach Us</a>
+  </div>
+  <button class="liquid-glass nav-cta" onclick="window.location.href='waitlist.html'">Join Waitlist</button>
+</nav>
+
+<div class="container">
+  <header>
+    <h1 class="reveal">Every Night You Lose 8 Hours of Consciousness. We're Taking Them Back.</h1>
+    <p class="reveal">When was the last time you <span class="highlight">woke up from a dream with an idea so clear</span> it felt like someone handed it to you?</p>
+    <p class="reveal">For most people, never. And that's the problem.</p>
+  </header>
+
+  <section>
+    <p class="reveal">You spend a third of your life unconscious. That's 2,920 hours every year. While you're gone, your brain is doing something extraordinary — consolidating everything you learned, processing everything that hurt, and making connections between ideas that your waking mind would never allow. The prefrontal cortex — the logical filter that keeps you sane during the day — goes quiet. What's left is something closer to genius than anything most people access while awake.</p>
+    
+    <p class="reveal">Ramanujan said a goddess visited him in his sleep and wrote equations on his tongue. Those equations took the world's best mathematicians decades to verify. Paul McCartney woke up one morning with Yesterday fully formed in his head and spent weeks asking people if they'd heard it somewhere — convinced it was too complete to have come from him.</p>
+    <p class="reveal">Otto Loewi dreamed the experiment that proved chemical neurotransmission. He woke up, couldn't read his notes, went back to sleep, dreamed it again, and won the Nobel Prize. Edison held steel balls over a metal plate so the moment he drifted off they'd drop and wake him, capturing whatever came through in that liminal state. Dali did the same thing with a key.</p>
+
+    <p class="reveal">These aren't coincidences. They're the same thing — deliberate or accidental access to a specific altered state of consciousness that almost nobody reaches intentionally. And every single person on Earth enters that state every night.</p>
+    <p class="reveal">We've just never had a way to use it.</p>
+  </section>
+
+  <section>
+    <h2 class="reveal">The Problem Nobody Is Solving</h2>
+    <p class="reveal">Sleep science has advanced enormously in the last decade. We know that slow wave sleep consolidates declarative memory. We know that REM sleep processes emotion and generates creative connections. We know that sleep deprivation reduces memory encoding capacity, degrades prefrontal function, and compounds into catastrophic cognitive debt over weeks.</p>
+    <p class="reveal">We also know that roughly 60-70% of college students get insufficient sleep. That high-performing professionals sacrifice sleep as a badge of honor. That the harder students cram by pulling all-nighters, the worse they perform — because they're destroying the biological process that makes studying permanent while simultaneously eliminating the hours when that process would have run.</p>
+    
+    <p class="reveal"><span class="highlight">The all-nighter is the worst academic strategy in existence.</span> Students keep doing it because studying feels productive and sleeping feels like giving up. The feeling is wrong. The biology is clear. And no product has ever bridged that gap.</p>
+
+    <p class="reveal">But the problem is bigger than studying. Think about what you actually lose every night. Not just study time. Eight hours of a brain running at full capacity — consolidating, processing, connecting — with zero input from you. No intention. No direction. No use of the extraordinary cognitive machinery that produced Yesterday and the periodic table and the structure of benzene.</p>
+    <p class="reveal">Every product ever built for sleep either tracks it passively or tries to help you get more of it. Oura tells you your sleep score. Whoop tells you your recovery. Apple Watch tells you how long you were in REM. None of them do anything about it. None of them make sleep intentional.</p>
+    <p class="reveal">Nobody has built the product that makes sleep actually work for you. Nobody has given people the controls.</p>
+    <p class="reveal" style="font-weight: 500; color: var(--black);">Until now.</p>
+  </section>
+
+  <section>
+    <h2 class="reveal">Introducing Architect by Lumos</h2>
+    <p class="reveal">Lumos is building Architect — a headband that gives every person on Earth deliberate access to the altered state of consciousness that history's greatest minds stumbled into by accident.</p>
+    <p class="reveal">Architect runs on a custom neuromorphic processor — the same chip architecture used by leading neurotechnology companies — with onboard AI that classifies your sleep stage in real time without sending a single byte of your brain data to the cloud. The entire system fits inside a headband comfortable enough to sleep in. No wires. No clinic. No sleep study required.</p>
+    <p class="reveal">It works in three layers. Each one builds on the last.</p>
+
+    <div class="layer-block reveal">
+      <span class="layer-title">Layer 1</span>
+      <h3>Fix your sleep.</h3>
+      <p>Before anything else works, the foundation has to be solid. Architect uses research-grade dry EEG electrodes to detect your brainwaves continuously through the night — actual neural data showing exactly when you're in slow wave sleep, when you're in REM, and when you're just lying there with your mind running at full speed.</p>
+      <p>For people who can't fall asleep — the racing thoughts, the anxiety — binaural beats at delta frequency slow the brain toward sleep. A haptic breathing guide pulses at the rate that activates the parasympathetic nervous system and physiologically forces the body toward rest. Not melatonin. Not white noise. Active neural deceleration using real-time brainwave feedback.</p>
+    </div>
+
+    <div class="layer-block reveal">
+      <span class="layer-title">Layer 2</span>
+      <h3>Consolidate what you learned.</h3>
+      <p>Once sleep is optimized, the system starts doing something with it. Architect uses bone conduction to trigger Targeted Memory Reactivation. Subtle audio cues replayed at precisely the right sleep stage allow your brain to consolidate, strengthen, and review information — turning eight hours of rest into eight hours of learning.</p>
+      <p>You go to sleep. You wake up having studied. No all-nighter. Ever.</p>
+    </div>
+
+    <div class="layer-block reveal">
+      <span class="layer-title">Layer 3</span>
+      <h3>The Ramanujan Layer.</h3>
+      <p>This is the moonshot. Architect guides you toward conscious awareness inside the dream state. Before sleep, you set an intention. As you enter REM sleep, the Targeted Memory Reactivation cue fires, planting your intention into the dream content. Then, a melodic pattern plays that signals your brain to become aware you're dreaming.</p>
+      <p>You set the intention. Architect does the rest. You wake up with what came through.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="reveal">Why Now</h2>
+    <p class="reveal">The neuroscience matured in 2021. Consumer EEG hardware reached product-grade quality. Onboard AI — TinyML models running sleep classification on a chip the size of a fingernail — became fast enough and cheap enough to deploy in a wearable. The tools to build this didn't exist five years ago. They exist today.</p>
+    <p class="reveal">The sleep tracking industry has built a multi-billion dollar market of people who deeply care about their sleep but get nothing that actively changes anything. Every sleep tracker tells you your sleep is broken. Nobody fixes it.</p>
+    <p class="reveal" style="font-weight: 500; color: var(--black);">Architect fixes it.</p>
+  </section>
+
+  <section>
+    <h2 class="reveal">The Roadmap</h2>
+    <div class="roadmap-item reveal">
+      <div class="roadmap-tag">Phase 1</div>
+      <div>
+        <p><strong>PPG Detection Prototype.</strong> We are starting to make a prototype with PPG sensors for accurate physiological state detection.</p>
+      </div>
+    </div>
+    <div class="roadmap-item reveal">
+      <div class="roadmap-tag">Phase 2</div>
+      <div>
+        <p><strong>4-Channel EEG Integration.</strong> After validating PPG, we will install EEG detection through 4-channel EEG chip modules directly into the device for high-fidelity brainwave monitoring.</p>
+      </div>
+    </div>
+    <div class="roadmap-item reveal">
+      <div class="roadmap-tag">Phase 3</div>
+      <div>
+        <p><strong>Ultrasonic Stimulation.</strong> We will transition to using focused ultrasonic stimulation. This allows us to safely force the brain to run targeted simulations, inducing lucidity and deep consolidation.</p>
+      </div>
+    </div>
+    <div class="roadmap-item reveal">
+      <div class="roadmap-tag">Phase 4</div>
+      <div>
+        <p><strong>The World-Changing Vision.</strong> We are expanding beyond sleep into a broader suite of neurotech devices that will fundamentally change how humanity interacts with their own consciousness.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="reveal">What This Actually Is</h2>
+    <p class="reveal">This is not a sleep tracker. This is not a study app. This is not a lucid dreaming gimmick. This is the first product ever built that treats the unconscious hours of human existence as a resource rather than a void — and gives people the tools to use them intentionally for the first time in history.</p>
+    <p class="reveal">Lumos means light. We're bringing light to the one place humans have never been able to see — the eight hours every night where some of the most important thinking of your life is happening completely without you.</p>
+    
+    <p class="reveal" style="text-align: center; margin-top: 64px;">
+      <span class="highlight">Every night you lose 8 hours of consciousness. Lumos gives them back.</span>
+    </p>
+  </section>
+</div>
+
+<footer class="site-footer" id="reach">
+  <div class="footer-top">
+    <div class="footer-logo">
+      <div class="footer-logo-mark"><img src="logo.png" alt="Lumos" /></div>
+    </div>
+    <div class="footer-right">
+      <p class="footer-vision-label">Our Vision</p>
+      <p class="footer-vision">Eight billion people fall unconscious every night and waste a third of their lives in the dark. We're ending that. Lumos is building the first technology that makes every human being conscious inside their own sleep — unlocking a new dimension of existence that evolution left sealed. This isn't incremental. This is the last frontier of the human mind.</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-col">
+      <h4>Lumos Inc.</h4>
+      <p>Research-stage neurotechnology</p>
+      <p>Toronto, ON, Canada</p>
+    </div>
+    <div class="footer-col">
+      <h4>General Inquiries</h4>
+      <a href="mailto:armaansharma2311@gmail.com">armaansharma2311@gmail.com</a>
+    </div>
+    <div class="footer-col">
+      <h4>Careers</h4>
+      <a href="mailto:thriloushj@gmail.com">thriloushj@gmail.com</a>
+    </div>
+    <div class="footer-col">
+      <h4>Press</h4>
+      <a href="mailto:armaansharma2311@gmail.com">armaansharma2311@gmail.com</a>
+    </div>
+    <div class="footer-col">
+      <h4>Social</h4>
+      <a href="#">@lumoshq</a>
+    </div>
+  </div>
+
+  <p class="footer-copy">&copy; 2026 Lumos Inc. All Rights Reserved</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

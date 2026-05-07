@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lumos Inc. — Join the Waitlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-display: 'Instrument Serif', serif;
+    --font-body: 'Inter', sans-serif;
+    --white: #ffffff;
+    --black: #1d1d1f;
+    --gray: #424245;
+    --light-gray: #86868b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body); color: var(--black); background: var(--white);
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  /* ── Nav ── */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 48px; background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  @media (max-width: 768px) { .nav { padding: 16px 24px; } }
+  .nav-wordmark { display: inline-flex; align-items: center; line-height: 1; }
+  .nav-wordmark img { height: 120px; width: auto; filter: brightness(0); margin-top: -20px; }
+  .nav-links-left { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { .nav-links-left { display: flex; } }
+  .nav-links-left a {
+    font-size: 0.875rem; font-weight: 400; color: var(--light-gray); transition: color 240ms ease;
+  }
+  .nav-links-left a.active, .nav-links-left a:hover { color: var(--black); }
+
+  /* ── Waitlist Content ── */
+  .waitlist-container {
+    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 160px 24px 80px; max-width: 600px; margin: 0 auto; width: 100%;
+  }
+  .waitlist-title {
+    font-family: var(--font-display); font-size: 4rem; color: var(--black);
+    margin-bottom: 16px; font-weight: 400; line-height: 1.1; letter-spacing: -0.02em;
+  }
+  .waitlist-subtitle { font-size: 1.125rem; color: var(--gray); margin-bottom: 48px; }
+  @media (max-width: 768px) { .waitlist-title { font-size: 3rem; } }
+
+  .email-form { display: flex; gap: 8px; width: 100%; }
+  @media (max-width: 480px) { .email-form { flex-direction: column; } }
+  .email-input {
+    flex: 1; padding: 16px 24px; border: 1px solid rgba(0,0,0,0.15); border-radius: 9999px;
+    font-size: 1rem; font-family: var(--font-body); outline: none; transition: border-color 0.2s ease;
+  }
+  .email-input:focus { border-color: var(--black); }
+  .submit-btn {
+    padding: 16px 36px; border-radius: 9999px; background: var(--black); color: var(--white);
+    font-family: var(--font-body); font-size: 1rem; font-weight: 500; border: none; cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .submit-btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+  .success-message {
+    display: none; flex-direction: column; align-items: center;
+    animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .success-icon { width: 64px; height: 64px; margin-bottom: 24px; color: #10b981; }
+  .success-title { font-family: var(--font-display); font-size: 3rem; font-weight: 400; margin-bottom: 16px; color: var(--black); }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Footer ── */
+  footer.site-footer { background: #141414; color: #fff; padding: 100px 80px 56px; margin-top: auto; }
+  @media (max-width: 768px) { footer.site-footer { padding: 72px 32px 40px; } }
+  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 80px; margin-bottom: 96px; }
+  @media (max-width: 768px) { .footer-top { flex-direction: column; gap: 56px; margin-bottom: 56px; } }
+  .footer-logo { flex-shrink: 0; }
+  .footer-logo-mark { line-height: 1; }
+  .footer-logo-mark img { height: 140px; width: auto; }
+  .footer-right { max-width: 480px; }
+  .footer-vision-label { font-family: var(--font-body); font-size: 0.8125rem; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin: 0 0 16px; }
+  .footer-vision { font-family: var(--font-body); font-size: 0.9375rem; line-height: 1.7; color: rgba(255,255,255,0.65); margin: 0; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: flex-start; gap: 80px; padding-top: 56px; border-top: 1px solid rgba(255,255,255,0.1); }
+  @media (max-width: 768px) { .footer-bottom { flex-direction: column; gap: 40px; } }
+  .footer-col h4 { font-family: var(--font-body); font-size: 0.8125rem; font-weight: 400; color: rgba(255,255,255,0.5); margin: 0 0 12px; letter-spacing: 0.03em; }
+  .footer-col p, .footer-col a { font-family: var(--font-body); font-size: 0.875rem; line-height: 1.8; color: rgba(255,255,255,0.75); margin: 0; display: block; transition: color 0.2s ease; }
+  .footer-col a:hover { color: #fff; }
+  .footer-copy { margin-top: 72px; font-family: var(--font-body); font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="lumos-hero.html" class="nav-wordmark"><img src="logo.png" alt="Lumos" /></a>
+  <div class="nav-links-left">
+    <a href="lumos-hero.html">Home</a>
+    <a href="product.html">Product</a>
+    <a href="mission.html">Mission</a>
+    <a href="lumos-hero.html#reach">Reach Us</a>
+  </div>
+</nav>
+
+<div class="waitlist-container">
+  <div id="form-section">
+    <h1 class="waitlist-title">Join the community.</h1>
+    <p class="waitlist-subtitle">Be the first to know when Architect launches.</p>
+    <form class="email-form" id="waitlist-form" onsubmit="handleWaitlist(event)">
+      <input type="email" class="email-input" placeholder="Enter your email" required>
+      <button type="submit" class="submit-btn">Enter</button>
+    </form>
+  </div>
+  
+  <div id="success-section" class="success-message">
+    <svg class="success-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    <h2 class="success-title">Congrats! You're signed up.</h2>
+    <p class="waitlist-subtitle">We'll send you a launch email when Architect is ready.</p>
+  </div>
+</div>
+
+<footer class="site-footer" id="reach">
+  <div class="footer-top">
+    <div class="footer-logo">
+      <div class="footer-logo-mark"><img src="logo.png" alt="Lumos" /></div>
+    </div>
+    <div class="footer-right">
+      <p class="footer-vision-label">Our Vision</p>
+      <p class="footer-vision">Eight billion people fall unconscious every night and waste a third of their lives in the dark. We're ending that. Lumos is building the first technology that makes every human being conscious inside their own sleep — unlocking a new dimension of existence that evolution left sealed. This isn't incremental. This is the last frontier of the human mind.</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-col">
+      <h4>Lumos Inc.</h4>
+      <p>Research-stage neurotechnology</p>
+      <p>Toronto, ON, Canada</p>
+    </div>
+    <div class="footer-col">
+      <h4>General Inquiries</h4>
+      <a href="mailto:armaansharma2311@gmail.com">armaansharma2311@gmail.com</a>
+    </div>
+    <div class="footer-col">
+      <h4>Careers</h4>
+      <a href="mailto:thriloushj@gmail.com">thriloushj@gmail.com</a>
+    </div>
+    <div class="footer-col">
+      <h4>Press</h4>
+      <a href="mailto:armaansharma2311@gmail.com">armaansharma2311@gmail.com</a>
+    </div>
+    <div class="footer-col">
+      <h4>Social</h4>
+      <a href="#">@lumoshq</a>
+    </div>
+  </div>
+
+  <p class="footer-copy">&copy; 2026 Lumos Inc. All Rights Reserved</p>
+</footer>
+
+<script>
+  function handleWaitlist(e) {
+    e.preventDefault();
+    document.getElementById('form-section').style.display = 'none';
+    document.getElementById('success-section').style.display = 'flex';
+  }
+</script>
+</body>
+</html>
