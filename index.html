@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- set before first paint so the intro text starts hidden (no flash);
+       if JS is off, the class is never added and text shows normally -->
+  <script>document.documentElement.classList.add('js-reveal');</script>
+  <title>lumos hq</title>
+  <meta name="description" content="the moonshot — a letter." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=19" />
+</head>
+<body>
+
+  <!-- Fixed fullscreen video background + cinematic grain -->
+  <div class="video-bg" aria-hidden="true">
+    <video id="bg-video" autoplay muted loop playsinline preload="auto">
+      <source src="assets/background.mp4?v=4" type="video/mp4" />
+    </video>
+    <div class="vignette"></div>
+    <canvas id="grain"></canvas>
+  </div>
+
+  <!-- Fixed header -->
+  <header class="site-header">
+    <a href="/" class="wordmark" aria-label="lumos hq home">
+      <img src="assets/logo.png?v=1" alt="lumos hq" />
+    </a>
+  </header>
+
+  <!-- Letter that scrolls over the video -->
+  <main class="letter">
+    <div class="letter-col">
+      <h2 class="heading">The Number</h2>
+      <p class="date">June 11, 2026</p>
+
+      <div class="para">Most companies start with a product. We started with a number.</div>
+
+      <div class="para">852 million. That is how many people lie awake every night, or wake up too early, or sleep a full eight hours and still feel like they were hit by a truck. We kept coming back to that number because nobody seemed angry enough about it. The entire industry had decided that telling you your sleep was bad counted as solving it.</div>
+
+      <div class="para">So we put everything on a table and started taking the problem apart.</div>
+
+      <div class="para">The table is still there. Research papers covered in our handwriting. Circuit boards in pieces. A device we have redrawn more times than we can count. It does not look like a company yet. It looks like three people refusing to accept that the most important thing your body does has no real tool built for it.</div>
+
+      <div class="para">That is what we are. Three people with AI backgrounds who decided sleep was worth more than the engineering jobs we walked away from. We won the TKS Toronto Moonshot Hub against 400 students and presented at Toronto Tech Week, but none of that mattered as much as the moment we realized the science to fix sleep already existed and nobody had bothered to put it into one device.</div>
+
+      <!-- huge gap that the scattered, draggable photos sit inside -->
+      <div class="photo-gap" id="photo-gap"></div>
+
+      <div class="para">That device is Architect. A device that reads your brain in real time and intervenes at every stage of the night. It does not watch your sleep. It rebuilds it. Every intervention traces back to peer reviewed research from Tübingen, Northwestern, and the published neuroscience of sleep. We are not inventing biology. We are building the thing the research has been waiting for.</div>
+
+      <div class="para">Right now we are leaving the part where you read papers and entering the part where you make something real. The table is shifting from theory to hardware. Soon it becomes something you can hold, wear, and feel working while you sleep.</div>
+
+      <div class="para">Little is expected of three people building brain computer interfaces out of a small studio. That is the advantage. We are free to attempt the unreasonable thing. Long after we are gone, no one may remember our name. But someone, somewhere, may remember the first night they finally slept the way they were supposed to.</div>
+
+      <div class="para">The papers are nearly read. The prototype is next.</div>
+
+      <div class="para yellow">Goodnight.</div>
+    </div>
+  </main>
+
+  <!-- Click-hold-drag photos; start scattered (left / middle / right), droppable anywhere -->
+  <figure class="drag-photo" data-rot="-5">
+    <img src="assets/photos/team-headband.jpg" alt="Trying on the Architect headband" draggable="false" />
+  </figure>
+  <figure class="drag-photo" data-rot="4">
+    <img src="assets/photos/team-trophy.jpg" alt="The team with the Moonshot trophy" draggable="false" />
+  </figure>
+  <figure class="drag-photo" data-rot="-3">
+    <img src="assets/photos/team-talk.jpg" alt="Founder presenting" draggable="false" />
+  </figure>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-canvas-wrap">
+      <canvas id="footer-canvas"></canvas>
+    </div>
+    <div class="footer-row">
+      <div class="footer-left">
+        <a href="/" class="wordmark footer-wordmark" aria-label="lumos hq home">
+          <img src="assets/logo.png?v=1" alt="lumos hq" />
+        </a>
+      </div>
+      <div class="footer-right">
+        <span class="footer-subtle">All rights reserved</span>
+        <a href="careers.html">Jobs</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js?v=19"></script>
+  <script src="footer-dots.js?v=1"></script>
+</body>
+</html>

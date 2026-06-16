@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>document.documentElement.classList.add('js-reveal');</script>
+  <title>About — Lumos</title>
+  <meta name="description" content="How three people tired of waking up late set out to rebuild human sleep." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Instrument+Sans:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=20" />
+</head>
+<body class="page-about">
+
+  <main class="about">
+
+    <!-- Near-black hero -->
+    <section class="hero-stars">
+      <div class="hero-stars-inner">
+        <h1 class="hero-headline" data-reveal>We're building the device<br />that rebuilds your sleep.</h1>
+        <p class="hero-sub" data-reveal>
+          A tiny team with unreasonable standards — building a brain-computer
+          interface for the one thing your body can't fake.
+        </p>
+        <div class="hero-chevron" aria-hidden="true">⌄</div>
+      </div>
+    </section>
+
+    <!-- The journey, as one long note + draggable polaroids -->
+    <section class="manifesto">
+      <article class="note">
+        <h2 class="note-title">How we got here.</h2>
+
+        <p>
+          It started as a personal failure. We were the kids who slept a full eight
+          hours and still woke up feeling hit by a bus. We set five alarms. We went
+          to bed early. We tried every app on the store. Nothing worked, because
+          <strong>the problem was never discipline. It was sleep itself</strong>,
+          and somehow nobody had built a real fix for the most important thing your
+          body does.
+        </p>
+
+        <p>
+          Here is the uncomfortable truth: <strong>sleep is the one thing you
+          cannot fake.</strong> Your screens push back the melatonin that is
+          supposed to knock you out. Your schedule drags your body clock around
+          like a ragdoll. Stress keeps you wired when you should be winding down.
+          That coffee from noon is still partying in your bloodstream at midnight.
+          And the gadgets that promise to help? They just watch. A ring, a watch,
+          an app, all politely informing you that you slept badly, as if that
+          counts as solving it. <strong>852 million people lose this fight every
+          single night.</strong>
+        </p>
+
+        <p>
+          So we decided to build the thing that actually does something about it.
+          We call it <strong>Architect</strong>: a device you wear that reads your
+          brain while you sleep and steps in, live, at every stage of the night. It
+          does not track your sleep. <strong>It rebuilds it.</strong> Every move it
+          makes is backed by real, peer reviewed neuroscience out of Tübingen and
+          Northwestern. We are not inventing biology. We are finally building the
+          thing the research has been screaming for.
+        </p>
+
+        <p>
+          People started to notice. We won the <strong>TKS Toronto Moonshot
+          Hub</strong> out of 400 students, presented at <strong>Toronto Tech
+          Week</strong>, and made the <strong>Final Round</strong> of an Emergent
+          Ventures grant. None of that is the point. But it kept telling us the same
+          thing: we are not the only ones who think this needs to exist.
+        </p>
+
+        <p>
+          We are <strong>small on purpose</strong>. Three people, no managers, no
+          growth targets, no meetings about meetings. We would rather build one
+          device that changes a single night than a hundred apps that change a
+          number on a chart.
+        </p>
+
+        <p>
+          Right now the science is done and the soldering is about to start.
+          <strong>This summer we build Architect's first prototype</strong> at a
+          hardware lab in Toronto. Theory is becoming something you can hold in your
+          hands, strap on, and feel working while you are asleep.
+        </p>
+
+        <p>
+          This is the part where it stops being an idea.
+          <strong>We are just getting started, and Architect is coming.</strong>
+        </p>
+
+        <div class="note-signs">
+          <div class="note-sign">
+            <span class="sign-name">Thriloush</span>
+            <span class="sign-role">Thriloush Jasotharan · CEO</span>
+          </div>
+          <div class="note-sign">
+            <span class="sign-name">Armaan</span>
+            <span class="sign-role">Armaan Sharma · CTO</span>
+          </div>
+          <div class="note-sign">
+            <span class="sign-name">Prassan</span>
+            <span class="sign-role">Prassan Aggarwal · CFO</span>
+          </div>
+        </div>
+      </article>
+
+      <figure class="polaroid polaroid--1">
+        <div class="polaroid-img">
+          <img src="assets/photos/founder-thriloush.jpg?v=3" alt="Thriloush" onerror="this.remove()" />
+        </div>
+        <figcaption>Thriloush</figcaption>
+      </figure>
+      <figure class="polaroid polaroid--2">
+        <div class="polaroid-img">
+          <img src="assets/photos/founder-armaan.jpg?v=3" alt="Armaan" onerror="this.remove()" />
+        </div>
+        <figcaption>Armaan</figcaption>
+      </figure>
+      <figure class="polaroid polaroid--3">
+        <div class="polaroid-img">
+          <img src="assets/photos/founder-prassan.jpg?v=2" alt="Prassan" onerror="this.remove()" />
+        </div>
+        <figcaption>Prassan</figcaption>
+      </figure>
+    </section>
+
+  </main>
+
+  <!-- Footer (shared dot-matrix wordmark) -->
+  <footer class="site-footer">
+    <div class="footer-canvas-wrap">
+      <canvas id="footer-canvas"></canvas>
+    </div>
+    <div class="footer-row">
+      <div class="footer-left">
+        <a href="/" class="wordmark footer-wordmark" aria-label="lumos hq home">
+          <img src="assets/logo.png?v=1" alt="lumos hq" />
+        </a>
+      </div>
+      <div class="footer-right">
+        <span class="footer-subtle">All rights reserved</span>
+        <a href="careers.html">Jobs</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- one-time fade/blur reveal -->
+  <script>
+    (function () {
+      const els = document.querySelectorAll('[data-reveal]');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach((el) => el.classList.add('in'));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach((el) => io.observe(el));
+    })();
+  </script>
+
+  <!-- draggable polaroids -->
+  <script>
+    (function () {
+      document.querySelectorAll('.polaroid').forEach((el) => {
+        let active = false, startX = 0, startY = 0, baseX = 0, baseY = 0;
+        el.addEventListener('pointerdown', (e) => {
+          active = true;
+          el.setPointerCapture(e.pointerId);
+          const parent = el.offsetParent.getBoundingClientRect();
+          const r = el.getBoundingClientRect();
+          // pin to explicit left/top so dragging works regardless of right/bottom
+          baseX = r.left - parent.left;
+          baseY = r.top - parent.top;
+          el.style.left = baseX + 'px';
+          el.style.top = baseY + 'px';
+          el.style.right = 'auto';
+          el.style.bottom = 'auto';
+          startX = e.clientX;
+          startY = e.clientY;
+          el.style.zIndex = 60;
+          el.classList.add('dragging');
+          e.preventDefault();
+        });
+        el.addEventListener('pointermove', (e) => {
+          if (!active) return;
+          el.style.left = baseX + (e.clientX - startX) + 'px';
+          el.style.top = baseY + (e.clientY - startY) + 'px';
+        });
+        const end = (e) => {
+          if (!active) return;
+          active = false;
+          try { el.releasePointerCapture(e.pointerId); } catch (_) {}
+          el.classList.remove('dragging');
+        };
+        el.addEventListener('pointerup', end);
+        el.addEventListener('pointercancel', end);
+      });
+    })();
+  </script>
+
+  <!-- the note starts tilted and straightens to rest as you scroll it into place -->
+  <script>
+    (function () {
+      const note = document.querySelector('.note');
+      if (!note) return;
+      const START = -5;   // degrees, tilted as it enters
+      const REST = -0.7;  // degrees, resting position
+      let ticking = false;
+
+      function update() {
+        const r = note.getBoundingClientRect();
+        const vh = window.innerHeight;
+        // 0 when the note top is at the bottom of the viewport,
+        // 1 once it has scrolled up into its resting zone
+        let p = (vh - r.top) / (vh * 0.7);
+        p = Math.max(0, Math.min(1, p));
+        const rot = START + (REST - START) * p;
+        note.style.transform = `rotate(${rot.toFixed(2)}deg)`;
+        note.style.opacity = (0.2 + 0.8 * Math.min(1, p * 1.4)).toFixed(3);
+      }
+
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => { update(); ticking = false; });
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      update();
+    })();
+  </script>
+
+  <script src="footer-dots.js?v=1"></script>
+</body>
+</html>
